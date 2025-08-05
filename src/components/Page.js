@@ -189,8 +189,6 @@ function Page(props) {
         <AppBar
           position="fixed"
           sx={{
-            width: { lg: `calc(100% - ${drawerWidth}px)` },
-            ml: { lg: `${drawerWidth}px` },
           }}
         >
           {pathname === "/" && (searchBarOpen || searchTerm) ? (
@@ -268,12 +266,12 @@ function Page(props) {
             </Toolbar>
           )}
         </AppBar>
-        <Box
+        {/* <Box
           component="nav"
           sx={{ width: { lg: drawerWidth }, flexShrink: { lg: 0 } }}
           aria-label="menu"
         >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. }
           <SwipeableDrawer
             container={container}
             variant="temporary"
@@ -309,7 +307,7 @@ function Page(props) {
           >
             {drawer}
           </Drawer>
-        </Box>
+        </Box> */}
         <Box
           component="main"
           sx={{

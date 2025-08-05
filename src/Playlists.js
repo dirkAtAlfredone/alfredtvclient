@@ -61,6 +61,8 @@ export default function Playlists() {
   const [deletePlaylistDialogOpen, setDeletePlaylistDialogOpen] =
     useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(false);
+
   // __ Context
   const {
     setAlertMessage,
@@ -129,13 +131,20 @@ export default function Playlists() {
         // Empty remote playlist name and url finally
         setRemotePlaylistName("");
         setRemotePlaylistUrl("");
+        handlePlaylistItemClick("Channels");
       });
   };
 
   // ***********************************
   useEffect(() => {
-    handleAddRemotePlaylistTrigger();
+    if(!initialLoad){
+      handleAddRemotePlaylistTrigger();
+    }
+    else {
+      setInitialLoad(true);
+    }
   }, []);
+
   // ***********************************
 
 
@@ -227,7 +236,7 @@ export default function Playlists() {
   // Playlist item function
   const handlePlaylistItemClick = (playlistName) => {
     setSelectedPlaylistName(playlistName);
-    navigate("/");
+    navigate("/channels");
   };
 
   // Playlist context menu functions

@@ -43,7 +43,7 @@ const styles = {
     padding: "20px",
     overflow: "hidden",
     aspectRatio: "1/1.2",
-    alignItems: "stretch",
+    alignItems: "stretch"
   },
   lazyLoadImage: {
     width: "auto",
@@ -365,9 +365,9 @@ export default function Home() {
                 component={Link}
                 to={`/play/${encodeURIComponent(item.name)}`}
                 style={styles.buttonBase}
-                onClick={() => handleChannelClick(item)}
+                //onClick={() => handleChannelClick(item)}
               >
-                <Grid container>
+                <Grid container >
                   <Grid
                     item
                     xs={12}

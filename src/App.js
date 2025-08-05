@@ -139,7 +139,7 @@ function App() {
         </Dialog>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Playlists />} />
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/play/:channelName" element={<Play />} />
             <Route path="*" element={<PageNotFound />} />

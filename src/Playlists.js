@@ -1,4 +1,4 @@
-import { useState, useRef, forwardRef, useContext } from "react";
+import { useState, useRef, forwardRef, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Page from "./components/Page";
 // MUI
@@ -46,7 +46,7 @@ export default function Playlists() {
   const [addRemotePlaylistDialogOpen, setAddRemotePlaylistDialogOpen] =
     useState(false);
   const [remotePlaylistName, setRemotePlaylistName] = useState("");
-  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState("");
+  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState("http://192.168.1.8:3002/ca.m3u");
   // Add from device ref
   const fileInputRef = useRef(null);
   // Playlist context menu states
@@ -104,8 +104,8 @@ export default function Playlists() {
     setAddRemotePlaylistDialogOpen(false);
     setBackdropLoaderOpen(true);
 
-    const playlistName =
-      remotePlaylistName || remotePlaylistUrl?.split("/").pop();
+    const playlistName = "Channels";
+      //remotePlaylistName || remotePlaylistUrl?.split("/").pop();
 
     fetch(remotePlaylistUrl)
       .then((res) => res.text())
@@ -132,6 +132,13 @@ export default function Playlists() {
       });
   };
 
+  // ***********************************
+  useEffect(() => {
+    handleAddRemotePlaylistTrigger();
+  }, []);
+  // ***********************************
+
+
   const handleAddPlaylistToDB = (playlistName, rawPlaylistData) => {
     // Convert IPTV playlist to JavaScript array of objects
     try {
@@ -152,13 +159,14 @@ export default function Playlists() {
               // If the the playlist is added, then make it selected
               setSelectedPlaylistName(playlistName);
               console.log(`${playlistName} playlist created`);
-            } else {
-              // If this playlist already exists in the database
-              setAlertMessage({
-                title: "Playlist exists",
-                message: `${playlistName} playlist already exists`,
-              });
-            }
+            } 
+            // else {
+            //   // If this playlist already exists in the database
+            //   setAlertMessage({
+            //     title: "Playlist exists",
+            //     message: `${playlistName} playlist already exists`,
+            //   });
+            // }
           });
       } else {
         setAlertMessage({

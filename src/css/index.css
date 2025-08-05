@@ -21,3 +21,20 @@ code {
 .title-toolbar{
   background-color: #FF6600;
 }
+
+.home-button{
+  color: #FFF;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: 5px;
+  border: 1px solid #FFF;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.home-button > .span {
+  font-weight: 600;
+}

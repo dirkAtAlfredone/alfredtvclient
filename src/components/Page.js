@@ -30,9 +30,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ClearIcon from "@mui/icons-material/Clear";
 // Hooks
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { GlobalContext } from "../App";
+import { colors } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -237,7 +238,7 @@ function Page(props) {
             </Toolbar>
           ) : (
             <Toolbar className="title-toolbar">
-              <IconButton
+              {/* <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 edge="start"
@@ -245,7 +246,10 @@ function Page(props) {
                 sx={{ mr: 2, display: { lg: "none" } }}
               >
                 <MenuIcon />
-              </IconButton>
+              </IconButton> */}
+              <Link to={{pathname: "/" }} className={"home-button"}>
+                <HomeIcon /> <span className="span"> Home </span>
+              </Link>
               <Typography variant="h6" noWrap component="div">
                 {pathname === "/" && selectedPlaylistName
                   ? selectedPlaylistName

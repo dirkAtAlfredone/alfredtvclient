@@ -185,8 +185,8 @@ export default function Play() {
   return (
     <Page title="AlfredOne TV">
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }}}>
-        <Box sx={{ width: "100%" }}>
-          <Box sx={{ flex: 1, height: "auto", position: "sticky", top: 54 }}>
+        <Box sx={{ width: "100%", maxWidth: 1134, margin: "auto"  }}>
+          <Box sx={{ flex: 1, height: "auto", position: "sticky", top: 54}}>
             <Player
               ref={videoPlayer}
               onVmError={onPlayerError}
@@ -246,7 +246,7 @@ export default function Play() {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ width: { xs: "100%", md: 240 } }}></Box>
+        {/* <Box sx={{ width: { xs: "100%", md: 240 } }}></Box> */}
       </Box>
     </Page>
   );

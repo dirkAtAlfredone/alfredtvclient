@@ -191,7 +191,7 @@ function Page(props) {
           sx={{
           }}
         >
-          {pathname === "/" && (searchBarOpen || searchTerm) ? (
+          {pathname === "/channels" && (searchBarOpen || searchTerm) ? (
             <Toolbar>
               <Paper
                 elevation={0}
@@ -206,7 +206,7 @@ function Page(props) {
                   alignItems: "center",
                   bgcolor:
                     theme.palette.mode === "light" ? "primar" : "#282424",
-                  color: "#fff",
+                  color: "#000",
                 }}
               >
                 <IconButton
@@ -252,7 +252,7 @@ function Page(props) {
                   : props.title}
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
-              {pathname === "/" && (
+              {pathname === "/channels" && (
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"

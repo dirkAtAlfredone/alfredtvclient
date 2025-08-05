@@ -184,7 +184,7 @@ export default function Play() {
 
   return (
     <Page title="AlfredOne TV">
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }}}>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ flex: 1, height: "auto", position: "sticky", top: 54 }}>
             <Player

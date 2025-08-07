@@ -46,7 +46,7 @@ export default function Playlists() {
   const [addRemotePlaylistDialogOpen, setAddRemotePlaylistDialogOpen] =
     useState(false);
   const [remotePlaylistName, setRemotePlaylistName] = useState("");
-  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState("http://192.168.1.8:3002/ca.m3u");
+  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState("http://74.208.74.215:3002/ca.m3u");
   // Add from device ref
   const fileInputRef = useRef(null);
   // Playlist context menu states

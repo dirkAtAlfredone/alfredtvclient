@@ -19,6 +19,9 @@ import PageNotFound from "./PageNotFound";
 // Get playlist data from custom hook
 import useLivePlaylistData from "./hooks/useLivePlaylistData";
 import useLivePlaylistCount from "./hooks/useLivePlaylistCount";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./AuthContext";
+import Authenticate from "./Authenticate";
 
 export const GlobalContext = createContext();
 
@@ -112,40 +115,44 @@ function App() {
         setCurrentChannelData,
       }}
     >
-      <ThemeProvider theme={theme}>
-        <CssBaseline enableColorScheme />
-        <Dialog
-          open={alertOpen}
-          onClose={handleAlertClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          fullWidth
-          maxWidth="sm"
-          TransitionComponent={Transition}
-        >
-          <DialogTitle id="alert-dialog-title">
-            {alertMessage?.title}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {alertMessage?.message}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAlertClose} autoFocus>
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Playlists />} />
-            <Route path="/channels" element={<Home />} />
-            <Route path="/play/:channelName" element={<Play />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline enableColorScheme />
+          <Dialog
+            open={alertOpen}
+            onClose={handleAlertClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            fullWidth
+            maxWidth="sm"
+            TransitionComponent={Transition}
+          >
+            <DialogTitle id="alert-dialog-title">
+              {alertMessage?.title}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {alertMessage?.message}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleAlertClose} autoFocus>
+                Ok
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<ProtectedRoute> <Playlists /></ ProtectedRoute>} />
+                <Route path="/channels" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+                <Route path="/play/:channelName" element={<ProtectedRoute><Play /></ProtectedRoute>} />
+                <Route path="authenticate" element={<Authenticate />} />
+                <Route path="*" element={<ProtectedRoute><PageNotFound /></ProtectedRoute>} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </AuthProvider>
+      
     </GlobalContext.Provider>
   );
 }

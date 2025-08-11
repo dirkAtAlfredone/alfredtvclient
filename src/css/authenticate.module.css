@@ -1,0 +1,55 @@
+.authenticate{
+    background-color: #FF6600;
+    height: 100vh;
+    position: relative;
+}
+
+.authenticate > .form{
+    background-color: #FFF;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 8px;
+    gap: 0.5rem;
+    width: 30rem;
+}
+
+.authenticate > .title{
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.label{
+    display: block;
+    width: 100%;
+}
+
+.text{
+    width: 100%;
+}
+
+.submit{
+    background-color: #FF6600;
+    color: #FFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    margin-top: 1rem;
+    font-size: larger;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.submit:hover{
+    cursor: pointer;
+    background-color: #FFF;
+    color: #000;
+}

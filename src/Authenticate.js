@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import styles from "./css/authenticate.module.css";
 import axios from "axios";
+import logo from "./images/logo.png";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -27,8 +28,8 @@ export default function Authenticate(){
 
     return (
         <main className={styles["authenticate"]}>
-            <h1 className={styles["title"]}>Alfred TV</h1>
             <form className={styles["form"]} onSubmit={onIdSubmit}>
+                <img src={logo} className={styles["logo"]} />
                 <label className={styles["label"]} htmlFor="userId">User ID: </label>
                 <input className={styles["text"]} id="userId" type="text"/>
                 <button className={styles["submit"]}>Submit</button>

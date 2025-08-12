@@ -9,8 +9,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    padding: 3rem;
-    top: 20%;
+    padding: 0 3rem 3rem;
+    top:15%;
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
@@ -52,4 +52,9 @@
     cursor: pointer;
     background-color: #FFF;
     color: #000;
+}
+
+.logo{
+    width: 70%;
+    object-fit: cover;
 }

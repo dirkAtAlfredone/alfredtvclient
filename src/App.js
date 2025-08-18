@@ -115,7 +115,8 @@ function App() {
         setCurrentChannelData,
       }}
     >
-      <AuthProvider>
+      <BrowserRouter>
+        <AuthProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Dialog
@@ -141,7 +142,6 @@ function App() {
               </Button>
             </DialogActions>
           </Dialog>
-          <BrowserRouter>
             <Routes>
                 <Route path="/" element={<ProtectedRoute> <Playlists /></ ProtectedRoute>} />
                 <Route path="/channels" element={<ProtectedRoute><Home /></ProtectedRoute>} />
@@ -149,10 +149,9 @@ function App() {
                 <Route path="authenticate" element={<Authenticate />} />
                 <Route path="*" element={<ProtectedRoute><PageNotFound /></ProtectedRoute>} />
             </Routes>
-          </BrowserRouter>
         </ThemeProvider>
       </AuthProvider>
-      
+      </BrowserRouter>
     </GlobalContext.Provider>
   );
 }

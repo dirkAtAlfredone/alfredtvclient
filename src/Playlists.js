@@ -35,6 +35,8 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Zoom ref={ref} {...props} />;
 });
 
+const REACT_APP_URL = process.env.REACT_APP_URL;
+
 export default function Playlists() {
   const navigate = useNavigate();
   // _ States
@@ -46,7 +48,7 @@ export default function Playlists() {
   const [addRemotePlaylistDialogOpen, setAddRemotePlaylistDialogOpen] =
     useState(false);
   const [remotePlaylistName, setRemotePlaylistName] = useState("");
-  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState("http://74.208.74.215:3002/ca.m3u");
+  const [remotePlaylistUrl, setRemotePlaylistUrl] = useState(`${REACT_APP_URL}/ca.m3u`);
   // Add from device ref
   const fileInputRef = useRef(null);
   // Playlist context menu states

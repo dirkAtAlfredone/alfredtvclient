@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
@@ -11,14 +11,19 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [init, setInit] = useState(false);
     const navigate = useNavigate();
+    const timeOutId = useRef(null);
 
     const login = async (userId) => {
         try {
-
-            const response = await axios.get(`${URL}/user/${userId}`);
+            const response = await axios.post(`${URL}/user`, {id: userId});
             if (response.status === 200) {
                 setUser(response.data.user);
                 localStorage.setItem("token", response.data.token);
+                const tId = setInterval(async () => {
+                    console.log("Revalidating...");
+                    
+                }, (response.data.timeLeft * 1000));
+                timeOutId.current = tId;
                 navigate("/");
             }
         }
@@ -29,58 +34,27 @@ export function AuthProvider({ children }) {
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem("token");
+        navigate("/");
     };
 
     const isLoggedIn = () => {
-        const token = localStorage.getItem("token");
-        return !!token;
+
+    };
+
+    const validate = async () => {
     };
 
     useEffect(() => {
-        let timeOutId = null;
-        const verify = async () => {
-            if(timeOutId){
-                clearTimeout(timeOutId);
-            }
-            const token = localStorage.getItem("token");
-            if (token) {
-                try {
-                    const headers = {
-                        "Authorization": `Bearer ${token}`
-                    };
-                    const response = await axios.get(`${URL}/token/validate`, { headers });
-                    if (response.status === 202) {
-                        localStorage.setItem("token", response.data.token);
-                        const timeLeft = response.data.timeLeft;
-                        timeOutId = setTimeout(async () => {
-                        timeOutId = await verify();
-                        }, ((timeLeft * 1000) + 5000));
-                    }
-                    else{
-                        throw new Error("Unauthorized");
-                    }
-                }
-                catch (e) {
-                    localStorage.removeItem("token");
-                }
-            }
+
+        (async () => {
+            await validate();
+        })();
+
+        if (!init) {
+            setInit(true);
         }
-
-        
-            if (!init) {
-                (async () => {
-                await verify();
-                })();
-
-                setInit(true);
-            }
-
-        return () => {
-            if(timeOutId){
-                clearTimeout(timeOutId);
-            }
-        }
-    }, []);
+    });
 
     return (
         <AuthContext.Provider value={{ user, login, logout, setUser }}>

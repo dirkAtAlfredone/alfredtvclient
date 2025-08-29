@@ -15,10 +15,14 @@ export function AuthProvider({ children }) {
     const timeOutId = useRef(null);
 
     const login = async (userId) => {
+
+        const deviceId = crypto.randomUUID();
+
         try {
-            const response = await axios.post(`${URL}/user`, {id: userId});
+            const response = await axios.post(`${URL}/user`, {id: userId, deviceId});
             if(response.status === 200){
                 localStorage.setItem("token", response.data.token);
+                localStorage.setItem("deviceId", deviceId);
                 validate();
             }
         }

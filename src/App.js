@@ -19,7 +19,6 @@ import PageNotFound from "./PageNotFound";
 // Get playlist data from custom hook
 import useLivePlaylistData from "./hooks/useLivePlaylistData";
 import useLivePlaylistCount from "./hooks/useLivePlaylistCount";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./AuthContext";
 import Authenticate from "./Authenticate";
 
@@ -143,11 +142,11 @@ function App() {
             </DialogActions>
           </Dialog>
             <Routes>
-                <Route path="/" element={<ProtectedRoute> <Playlists /></ ProtectedRoute>} />
-                <Route path="/channels" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-                <Route path="/play/:channelName" element={<ProtectedRoute><Play /></ProtectedRoute>} />
+                <Route path="/" element={<Playlists />} />
+                <Route path="/channels" element={<Home />} />
+                <Route path="/play/:channelName" element={<Play />} />
                 <Route path="authenticate" element={<Authenticate />} />
-                <Route path="*" element={<ProtectedRoute><PageNotFound /></ProtectedRoute>} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </ThemeProvider>
       </AuthProvider>

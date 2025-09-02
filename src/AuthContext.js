@@ -23,7 +23,9 @@ export function AuthProvider({ children }) {
             if(response.status === 200){
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("deviceId", deviceId);
-                validate();
+                setUser(response.data.user);
+                console.log("navigating...");
+                navigate("/");
             }
         }
         catch (e) {
@@ -42,6 +44,7 @@ export function AuthProvider({ children }) {
     };
 
     const validate = async () => {
+        console.log("validating...");
         if(!!timeOutId.current){
             clearTimeout(timeOutId.current);
         }
@@ -61,13 +64,20 @@ export function AuthProvider({ children }) {
                         clearTimeout(timeOutId.current);
                     }
                     timeOutId.current = setTimeout(validate, response.data.timeLeft * 1000);
-                    navigate("/");
+                }
+                else{
+                    throw new Error("Invalid...");
                 }
             } catch(e){
                 setUser(null);
                 localStorage.removeItem("token");
                 navigate("/authenticate");
             }
+        }
+        else{
+            setUser(null);
+            localStorage.removeItem("token");
+            navigate("/authenticate");
         }
     };
 
@@ -79,7 +89,7 @@ export function AuthProvider({ children }) {
             })();
             setInit(true);
         }
-    }, [init]);
+    }, [init, user]);
 
     if(!init){
         return <BackdropLoader open={true} />

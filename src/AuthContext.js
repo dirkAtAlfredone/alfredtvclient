@@ -44,7 +44,6 @@ export function AuthProvider({ children }) {
     };
 
     const validate = async () => {
-        console.log("validating...");
         if(!!timeOutId.current){
             clearTimeout(timeOutId.current);
         }
